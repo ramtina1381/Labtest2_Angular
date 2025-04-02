@@ -1,0 +1,24 @@
+<div class="mission-list-container">
+  <button (click)="toggleFilter()">Filter by Launch Year</button>
+
+  <!-- Show the mission filter when button is clicked -->
+  <app-missionfilter *ngIf="showFilter" (missionsFiltered)="onMissionsFiltered($event)"></app-missionfilter>
+
+  <!-- Display missions -->
+  <div class="mission-container">
+    <div *ngFor="let mission of missions" class="mission-card">
+      <img [src]="mission.links.mission_patch_small" alt="Mission Patch" />
+      <h3>{{ mission.mission_name }}</h3>
+      <p>Flight Number: {{ mission.flight_number }}</p>
+      <p>Launch Year: {{ mission.launch_year }}</p>
+      <p>Details: {{ mission.details }}</p>
+      <p>Rocket: {{ mission.rocket.rocket_name }} ({{ mission.rocket.rocket_type }})</p>
+      <a [href]="mission.links.article_link" target="_blank">Article</a>
+      <a [href]="mission.links.wikipedia" target="_blank">Wikipedia</a>
+      <a [href]="mission.links.video_link" target="_blank">Video</a>
+
+      <!-- Open mission details dialog -->
+      <button (click)="showMissionDetails(mission.flight_number)">View Details</button>
+    </div>
+  </div>
+</div>

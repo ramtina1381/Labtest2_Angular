@@ -1,0 +1,27 @@
+<div *ngIf="mission" class="mission-details">
+  <h2>{{ mission.mission_name || 'N/A' }}</h2>
+
+  <img *ngIf="mission.links?.mission_patch_small" [src]="mission.links.mission_patch_small" alt="Mission Patch" />
+
+  <p><strong>Flight Number:</strong> {{ mission.flight_number || 'N/A' }}</p>
+  <p><strong>Launch Year:</strong> {{ mission.launch_year || 'N/A' }}</p>
+  <p><strong>Details:</strong> {{ mission.details || 'No details available' }}</p>
+
+  <!-- Rocket Information -->
+  <p *ngIf="mission.rocket"><strong>Rocket:</strong> {{ mission.rocket.rocket_name || 'Unknown' }} ({{ mission.rocket.rocket_type || 'N/A' }})</p>
+
+  <!-- Additional Details -->
+  <p><strong>Launch Date:</strong> {{ mission.launch_date_utc ? (mission.launch_date_utc | date:'medium') : 'Unknown' }}</p>
+  <p><strong>Launch Site:</strong> {{ mission.launch_site?.site_name_long || 'N/A' }}</p>
+  <p><strong>Failure Details:</strong> {{ mission.launch_failure_details?.reason || 'N/A' }}</p>
+
+  <!-- Links to articles and media -->
+  <div *ngIf="mission.links">
+    <a *ngIf="mission.links.article_link" [href]="mission.links.article_link" target="_blank">Read Article</a> |
+    <a *ngIf="mission.links.wikipedia" [href]="mission.links.wikipedia" target="_blank">Wikipedia</a> |
+    <a *ngIf="mission.links.video_link" [href]="mission.links.video_link" target="_blank">Watch Video</a>
+  </div>
+
+  <!-- Close Button -->
+  <button mat-button (click)="close()">Close</button>
+</div>
